@@ -1424,12 +1424,19 @@ abstract class BoletoAbstract
      */
     protected function getFatorVencimento()
     {
-        if (!$this->getContraApresentacao()) {
-            $date = new DateTime('1997-10-07');
-            return $date->diff($this->getDataVencimento())->days;
-        } else {
+        if ($this->getContraApresentacao()) {
             return '0000';
         }
+
+        $dataVencimento = $this->getDataVencimento();
+
+        $date = new DateTime('2025-02-22');
+        if ($dataVencimento >= $date) {
+            return (string) $date->diff($dataVencimento)->days + '1000';
+        }
+
+        $date = new DateTime('1997-10-07');
+        return (string) $date->diff($dataVencimento)->days;
     }
 
     /**
