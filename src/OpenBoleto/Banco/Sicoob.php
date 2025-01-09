@@ -173,24 +173,6 @@ class Sicoob extends BoletoAbstract
     }
 
     /**
-     * O fator de vencimento do título é definido pela diferença da data de vencimento do título
-     * e a data base (03/07/2000), acrescido de 1000. Caso o titulo não tenha data de vencimento o fator
-     * será preenchido com zeros.
-     * fator de vencimento = (data de vencimento) - (03/07/2000) + 1000
-     *
-     * @return string
-     */
-    protected function getFatorVencimento()
-    {
-        if (!$this->getContraApresentacao()) {
-            $date = new \DateTime('2000-07-03');
-            return $date->diff($this->getDataVencimento())->days + 1000;
-        } else {
-            return '0000';
-        }
-    }
-
-    /**
      * Método para gerar o código da posição de 20 a 44
      *
      * Composição do Campo Livre no Sicoob:
